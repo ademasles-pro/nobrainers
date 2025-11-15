@@ -1,26 +1,176 @@
 @import "tailwindcss";
 
+/* Define color scheme and CSS variables for the Enterprise Graph Brain */
 :root {
+  /* Border radius */
+  --radius: 0.5rem;
+
+  /* Light mode colors */
   --background: #ffffff;
   --foreground: #171717;
+  --card: #f5f5f5;
+  --card-foreground: #171717;
+  --primary: #00d4ff;
+  --primary-foreground: #000000;
+  --secondary: #8b5cf6;
+  --secondary-foreground: #ffffff;
+  --muted: #9ca3af;
+  --muted-foreground: #6b7280;
+  --accent: #ff6b35;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #00d4ff;
+  
+  /* Node type colors */
+  --node-person: #00d4ff;
+  --node-conversation: #10b981;
+  --node-artifact: #f97316;
+  --node-agent: #8b5cf6;
+  --node-action: #ef4444;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --color-node-person: var(--node-person);
+  --color-node-conversation: var(--node-conversation);
+  --color-node-artifact: var(--node-artifact);
+  --color-node-agent: var(--node-agent);
+  --color-node-action: var(--node-action);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* Dark mode - Professional dark theme for enterprise application */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --card: #1e293b;
+    --card-foreground: #f1f5f9;
+    --primary: #00d4ff;
+    --primary-foreground: #0a0e27;
+    --secondary: #a78bfa;
+    --secondary-foreground: #0a0e27;
+    --muted: #64748b;
+    --muted-foreground: #94a3b8;
+    --accent: #ff6b35;
+    --accent-foreground: #0a0e27;
+    --destructive: #ff5555;
+    --destructive-foreground: #0a0e27;
+    --border: #334155;
+    --input: #334155;
+    --ring: #00d4ff;
   }
 }
 
+/* Global styles */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Tailwind layer additions */
+@layer utilities {
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary via-accent to-primary;
+  }
+
+  .bg-gradient-surface {
+    @apply bg-gradient-to-br from-card via-card/50 to-card/30;
+  }
+
+  /* Glow effects for interactive elements */
+  .shadow-glow-primary {
+    @apply shadow-lg shadow-primary/20;
+  }
+
+  .shadow-glow-accent {
+    @apply shadow-lg shadow-accent/20;
+  }
+
+  /* Node type background colors */
+  .bg-node-person {
+    @apply bg-node-person;
+  }
+
+  .bg-node-conversation {
+    @apply bg-node-conversation;
+  }
+
+  .bg-node-artifact {
+    @apply bg-node-artifact;
+  }
+
+  .bg-node-agent {
+    @apply bg-node-agent;
+  }
+
+  .bg-node-action {
+    @apply bg-node-action;
+  }
+
+  /* Animation for side panels */
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-in-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+/* Scrollbar styling for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
 }
